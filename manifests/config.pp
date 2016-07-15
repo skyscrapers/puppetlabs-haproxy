@@ -43,7 +43,10 @@ define haproxy::config (
     owner        => '0',
     group        => '0',
     mode         => '0644',
-    validate_cmd => '/usr/sbin/haproxy -f % -c',
+    validate_cmd => versioncmp($::puppetversion, '3.5') >= 0 ? {
+      true => '/usr/sbin/haproxy -f % -c',
+      default => undef
+    }
   }
 
   # Simple Header
