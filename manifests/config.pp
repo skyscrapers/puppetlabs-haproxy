@@ -39,7 +39,7 @@ define haproxy::config (
     $_config_file = $haproxy::config_file
   }
 
-  if versioncmp($::puppetversion, '3.5') >= 0 {
+  if versioncmp($::puppetversion, '3.5') >= 0 and ($::serverversion == undef or versioncmp($::serverversion, '3.5') >= 0) {
     $validate_cmd = '/usr/sbin/haproxy -f % -c'
   } else {
     $validate_cmd = undef
